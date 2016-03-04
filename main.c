@@ -31,6 +31,7 @@ int main(int argc, char *args[])
     }
 
     CalculateSum(L);
+
     ListFree(L);
   
     /* ListShow(L); */

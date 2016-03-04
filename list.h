@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "item.h"
 
 typedef struct list_node_s
@@ -11,22 +10,20 @@ typedef struct list_node_s
     void *data;
     struct list_node_s *next;
 }list_node_t;
-
 typedef struct list_s
 {
     int size;
     list_node_t *head;
 }list_t;
-
 /* interfaces */
 list_t *ListInit();
 int ListPushBack(list_t *L, void * obj);
-/* int ListPushFront(list_t *L, void * obj); */
 int ListFree(list_t *L);
 void *ListIsNodeInListById(list_t *L, char * id);
 int ListShow(list_t *L);
 
 
+/* 该结构体用于存最后特殊输出的买二赠一商品的节点 */
 typedef struct gift_list_s
 {
     void *data;

@@ -16,12 +16,10 @@ typedef struct item_s
     int type;			/* 0x01->95折, 0x10->买二送一 */
     char id[MAX_ID_LEN];	/* for example: 'ITEM000001' */
 }item_t;
-
 /* interfaces */
 item_t * ItemMakeitem(char *id, int count);
 item_t * ItemMakeitemEx(char *id, double price, char *name, int type, int count);
 int ItemShow(void *item);
-
 
 typedef struct price_s
 {
