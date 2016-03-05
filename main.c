@@ -1,11 +1,15 @@
 #include "head.h"
 
+extern list_t *my_price;
+
 int main(int argc, char *args[])
 {
     char *buffer = (char *)malloc(MAX_LINE_LEN);;
     char *result = (char *)malloc(MAX_LINE_LEN);;
     int number;
     int dwnum;
+
+    GetPrice();
 
     list_t *L = ListInit();
 
@@ -20,8 +24,7 @@ int main(int argc, char *args[])
 	    item_t* curnode;
 	    if((curnode = ListIsNodeInListById(L, result)) != NULL)
 	    {
-		/* printf("buffer = %s,result = %snum = %d\n",buffer , result, number); */
-		curnode->count++;
+		curnode->count += number;
 		continue;
 	    }
 
@@ -30,11 +33,11 @@ int main(int argc, char *args[])
 	}
     }
 
-    CalculateSum(L);
-
-    ListFree(L);
-  
     /* ListShow(L); */
+    CalculateSum(L);
+    ListFree(L);
+
+    ListFree(my_price);
 
     fclose(file);
     free(buffer);

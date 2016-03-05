@@ -47,11 +47,11 @@ int ParseLine(char * buffer, char * result, int * number)
 
 int WhichType(int type)
 {
-    if(type & 0x10)
+    if((type >> 1 )& 0x0001)
     {
 	return GIFT;
     }
-    else if(type & 0x01)
+    else if(type & 0x0001)
     {
 	return DISCOUNT;
     }
@@ -86,18 +86,12 @@ int CalculateSum(list_t *L)
 	switch(type)
 	{
 	case COMMON:
-	    /* printf("common\n"); */
-	    /* ItemShow((void*)node); */
 	    CalculateCommon(node);
 	    break;
 	case DISCOUNT:
-	    /* printf("discount\n"); */
-	    /* ItemShow((void*)node); */
 	    CalculateDiscount(node);
 	    break;
 	case GIFT:
-	    /* printf("gift\n"); */
-	    /* ItemShow((void*)node); */
 	    gift_flag = 1;
 	    CalculateGift(node);
 	    break;
@@ -115,7 +109,11 @@ int CalculateSum(list_t *L)
 	gift_list_t *temp_node = g_list->next;
 	while(temp_node)
 	{
-	    printf("名称：%s，数量：%d\n", ((item_t *)(temp_node->data))->name,((item_t *)(temp_node->data))->count / 3);
+	    int discount_count = ((item_t *)(temp_node->data))->count / 3;
+	    if(discount_count)
+	    {
+		printf("名称：%s，数量：%d%s\n", ((item_t *)(temp_node->data))->name, discount_count, ((item_t *)(temp_node->data))->quantifier);
+	    }
 	    temp_node = temp_node->next;
 	}
     }
@@ -130,14 +128,14 @@ int CalculateSum(list_t *L)
 
 int CalculateCommon(item_t *node)
 {
-    printf("名称：%s，数量：%d，单价：%f（元），小计：%f（元）\n",node->name, node->count, node->price, (node->price * node->count));
+    printf("名称：%s，数量：%d%s，单价：%f（元），小计：%f（元）\n",node->name, node->count, node->quantifier, node->price, (node->price * node->count));
     sum += (node->price * node->count);
     return 0;
 }
 
 int CalculateDiscount(item_t *node)
 {
-    printf("名称：%s，数量：%d，单价：%f（元），小计：%f（元），节省%f（元）\n",node->name, node->count, node->price, \
+    printf("名称：%s，数量：%d%s，单价：%f（元），小计：%f（元），节省%f（元）\n",node->name, node->count, node->quantifier, node->price, \
 	   (node->price * node->count * 0.95), (node->price * node->count * 0.05));
     sum += (node->price * node->count * 0.95);
     discount_sum += (node->price * node->count * 0.05);
@@ -147,7 +145,7 @@ int CalculateDiscount(item_t *node)
 int CalculateGift(item_t *node)
 {
     int actual_count = node->count - (node->count / 3); /* 这里还需要改正一下，计算方法不对 */
-    printf("名称：%s，数量：%d，单价：%f（元），小计：%f（元）\n",node->name, node->count, node->price, (node->price * actual_count));
+    printf("名称：%s，数量：%d%s，单价：%f（元），小计：%f（元）\n",node->name, node->count, node->quantifier, node->price, (node->price * actual_count));
     sum += (node->price * actual_count);
     discount_sum += (node->price * (node->count - actual_count));
 

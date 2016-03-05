@@ -9,6 +9,7 @@
 #include "list.h"
 #include "item.h"
 #include "function.h"
+#include "price.h"
 
 /* some macro */
 #define MAX_LINE_LEN 1024

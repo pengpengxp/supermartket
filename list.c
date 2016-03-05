@@ -143,3 +143,31 @@ int gListInsert(gift_list_t *L, void *data)
     
     return 0;
 }
+
+int ListShowPrice(list_t *L)
+{
+    if(L == NULL)
+    {
+	return -1;
+    }
+	
+    printf("\n\nmy_price list size = %d\n",L->size);
+    printf("=========================================================\n\n\n");
+
+    list_node_t *p = L->head->next;
+    while(p)
+    {
+	price_t *node = (price_t*)p->data;
+	printf("[name = %s\t",node->name);
+	printf("id = %s\t",node->id);
+	printf("type = 0x%x\t",node->type);
+	printf("price = %f\t",node->price);
+	printf("quantifier = %s\t",node->quantifier);
+	/* printf("count = %d]",node->count); */
+	printf("\n");
+	p = p->next;
+    }
+
+    return 0;
+    
+}

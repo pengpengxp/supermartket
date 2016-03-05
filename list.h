@@ -21,7 +21,7 @@ int ListPushBack(list_t *L, void * obj);
 int ListFree(list_t *L);
 void *ListIsNodeInListById(list_t *L, char * id);
 int ListShow(list_t *L);
-
+int ListShowPrice(list_t *L);
 
 /* 该结构体用于存最后特殊输出的买二赠一商品的节点 */
 typedef struct gift_list_s
