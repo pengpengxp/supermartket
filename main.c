@@ -13,8 +13,10 @@ int main(int argc, char *args[])
 
     list_t *L = ListInit();
 
-    FILE * file = fopen("input.txt", "r");
-    while(fgets(buffer, MAX_LINE_LEN, file))
+    /* FILE * file = fopen("input.txt", "r"); */
+
+    /* while(fgets(buffer, MAX_LINE_LEN, file)) */
+    while(fgets(buffer, MAX_LINE_LEN, stdin))
     {
 	number = 0;
 	memset(result, 0, MAX_LINE_LEN);
@@ -39,7 +41,7 @@ int main(int argc, char *args[])
 
     ListFree(my_price);
 
-    fclose(file);
+    /* fclose(file); */
     free(buffer);
     free(result);
     return 0;

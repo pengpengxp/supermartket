@@ -163,7 +163,6 @@ int ListShowPrice(list_t *L)
 	printf("type = 0x%x\t",node->type);
 	printf("price = %f\t",node->price);
 	printf("quantifier = %s\t",node->quantifier);
-	/* printf("count = %d]",node->count); */
 	printf("\n");
 	p = p->next;
     }

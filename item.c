@@ -2,17 +2,6 @@
 #include "list.h"
 
 #define MAX_PRICE_LEN 5		/* 总共商口种类 */
-/* 这就是整个价格表与是否打折等信息，其中type最后一位为1表示95折，倒数
- * 第二位为1表示买二送一，均为0表示普通商品 */
-
-/* price_t my_price[MAX_PRICE_LEN] = { */
-/*     {"可口可乐", 3.00, 0x01, "ITEM000001"}, */
-/*     {"羽手球", 1.00, 0x10, "ITEM000002"}, */
-/*     {"苹果", 5.00, 0x00, "ITEM000003"}, */
-/*     {"梨", 3.50, 0x00, "ITEM000004"}, */
-/*     {"裤子", 49.00, 0x11, "ITEM000005"}, */
-/* }; */
-
 extern list_t *my_price;
 
 item_t * ItemMakeitem(char *id, int count)
