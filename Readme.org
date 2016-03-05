@@ -30,10 +30,14 @@
   
   执行 =./supermarket < input.txt= 程序就可以根据 =input.txt= 文件中的
   输入信息计算并打印出结果。
+  
+  也可以直接运行程序 =./supermarket= ，然后手动输入，最后 =Ctrl+D= 结
+  束即可。
 
 ** 测试
    我自己在testinput目录下写了几个模拟的input，然后用本目录下的
    =test.sh= 脚本来执行测试。可以直接执行 =./test.sh= 即可。
+** [[https://github.com/pengpengxp/supermartket][github地址在这里]]
 * todo
   1. [X] gift计算方法不对。
   2. [X] 还需要总计。
@@ -43,4 +47,4 @@
   5. [X] 输入还有点小问题，没有量词。
   6. [X] 换了输入方式后，type判断不出来了，修改WhichType实现。
   7. [X] Check一下链表的使用有没有问题。
-  8. [ ] 错误处理：输入中有错，程序中运行有错。
+  8. [X] 错误处理：输入中有错，程序中运行有错。

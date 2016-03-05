@@ -68,7 +68,6 @@ gift_list_t *g_list= NULL;
 
 int CalculateSum(list_t *L)
 {
-
     sum = 0.0;
     discount_sum = 0.0;
     gift_flag = 0;

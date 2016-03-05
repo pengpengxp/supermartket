@@ -1,10 +1,13 @@
 #include "price.h"
+#include "head.h"
 
 list_t *my_price;
 
 int GetPrice()
 {
     my_price = ListInit();
+    if(my_price == NULL)
+	return ERRNO_NULL_POINTER;
     
     FILE *file = fopen("price.txt", "r");
     char *buffer = (char *)malloc(MAX_LINE_LEN);;
@@ -12,14 +15,15 @@ int GetPrice()
 
     char name[MAX_NAME_LEN];
     double price;
-    int type;			/* 0x01->95折, 0x10->买二送一 */
+    int type;			/* 01->95折, 10->买二送一 */
     char id[MAX_ID_LEN];	/* for example: 'ITEM000001' */
     char quantifier[MAX_QUANTIFIER_LEN];
+    int dwnum;
 
     while(fgets(buffer, MAX_LINE_LEN, file))
     {
-	/* printf("buffer = %s\n", buffer); */
 	sscanf(buffer,"%s %lf %d %s %s\n" ,name, &price, &type,id, quantifier);
+
 	DeleteDoubleQuotes(name);
 	DeleteDoubleQuotes(quantifier);
 	DeleteDoubleQuotes(id);
@@ -31,14 +35,13 @@ int GetPrice()
 	strncpy(temp_node->id, id, strlen(id) + 1);
 	strncpy(temp_node->quantifier, quantifier, strlen(quantifier) + 1);
 
-	/* printf("name = %s, price = %f, type = %d, id = %s, quantifier = %s\n",temp_node->name ,temp_node->price, temp_node->type, temp_node->id, temp_node->quantifier); */
-
-	ListPushBack(my_price, (void*)temp_node);
+	dwnum = ListPushBack(my_price, (void*)temp_node);
+	if(dwnum != 0)
+	{
+	    return ERRNO_LISTPUSHBACK_FAIL;
+	}
 	
     }
-
-    /* printf("size = %d\n",my_price->size); */
-    /* ListShowPrice(my_price); */
 
     fclose(file);
     free(buffer);

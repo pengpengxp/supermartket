@@ -9,18 +9,23 @@ int main(int argc, char *args[])
     int number;
     int dwnum;
 
-    GetPrice();
-
+    dwnum = GetPrice();
+    if(dwnum != 0)
+    {
+	return dwnum;
+    }
     list_t *L = ListInit();
+    if(L == NULL)
+    {
+	return ERRNO_NULL_POINTER;
+    }
 
-    /* FILE * file = fopen("input.txt", "r"); */
-
-    /* while(fgets(buffer, MAX_LINE_LEN, file)) */
     while(fgets(buffer, MAX_LINE_LEN, stdin))
     {
 	number = 0;
 	memset(result, 0, MAX_LINE_LEN);
 	dwnum = ParseLine(buffer, result, &number);
+
 	if(dwnum == 0)
 	{
 	    item_t* curnode;
@@ -31,17 +36,27 @@ int main(int argc, char *args[])
 	    }
 
 	    item_t * node = ItemMakeitem(result, number);
-	    ListPushBack(L, (void*) node);
+	    if(node == NULL)
+	    {
+		return ERRNO_MAKEITEM_FAIL;
+	    }
+
+	    dwnum = ListPushBack(L, (void*) node);
+	    if(dwnum != 0)
+	    {
+		return ERRNO_LISTPUSHBACK_FAIL;
+	    }
 	}
     }
 
-    /* ListShow(L); */
-    CalculateSum(L);
+    dwnum = CalculateSum(L);
+    if(dwnum != 0)
+    {
+	return ERRNO_CALCULATESUM_FAIL;	
+    }
+
     ListFree(L);
-
     ListFree(my_price);
-
-    /* fclose(file); */
     free(buffer);
     free(result);
     return 0;
